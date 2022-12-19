@@ -50,7 +50,8 @@
     rm ~/.config/nixpkgs/home.nix
 
     # symlink the fetched config
-    ln -s $(pwd)/home.nix $HOME/.config/nixpkgs/home.nix
+    cd dotfiles
+    ln -s $(pwd)/nixpkgs $HOME/.config/nixpkgs
 
     # let the home-manager do its deeds
     home-manager switch
@@ -62,3 +63,7 @@
     echo "$(pwd)/.nix-profile/bin/fish" >> /etc/shells
     chsh -s $(pwd)/.nix-profile/bin/fish
     ```
+
+i very much thank [Chris Bailey](https://cbailey.co.uk/posts/a_minimal_nix_development_environment_on_wsl) for his tutorial, 
+[Lily Ballard](https://github.com/lilyball/nix-env.fish) for her fish config, and [Christian Chiarulli](https://github.com/LunarVim/Neovim-from-scratch)
+for his video series on Neovim from scratch.
