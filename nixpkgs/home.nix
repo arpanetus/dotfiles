@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 
-let
+with builtins; let
   # TODO: refactor, since ugly.
   hd = "${config.home.homeDirectory}/.config/nixpkgs/neovim";
 
@@ -8,23 +8,15 @@ let
   rp = pkgs.lib.strings.removePrefix;
 
   nvimFiles = (map (x: ".${rp hd x}") (lfr hd));
-
-  nvimFolderPfx = builtins.toString ./neovim;
-
-  sources = (map (x: ".config/nvim/lua/${rp nvimFolderPfx x}") (nvimFiles));
+  sources = (map (x: ".config/nvim/lua/${rp "./neovim" x}") (nvimFiles));
 
   ofMap = mapped: pairs:
-    if (builtins.length pairs) == 0 
-      then mapped 
+    if (length pairs) == 0 then mapped 
     else 
       let 
-        pair = builtins.head pairs;
-        tail = builtins.tail pairs;
+        p = head pairs;
       in
-        let
-         newMap = {${pair.fst} = {source = ./. + "/neovim/" + (rp "." pair.snd);};};
-        in
-          ofMap (mapped // newMap) tail;
+        ofMap (mapped // {${p.fst}.source = ./. + "/neovim/" + (rp "." p.snd);}) (tail pairs);
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -39,6 +31,7 @@ in
     git
     tmux
     openssh
+    tree
 
     # Monitoring.
     htop
@@ -47,11 +40,12 @@ in
     # Dev.
     docker
     docker-compose
-    
+
     # Programming languages.
     gcc
-    python
     nodejs
+    python2Full
+    python311
 
     ## Figure out how to properly install.
     # clang 
@@ -87,6 +81,7 @@ in
       };
     };
     ".config/fish/conf.d/nix-env.fish" = {source = ./fish/conf.d/nix-env.fish;};
+    ".config/fish/conf.d/nvim.fish" = {source = ./fish/conf.d/nvim.fish;};
   } (pkgs.lib.lists.zipLists sources nvimFiles);
 
   # Neovim HM config.
@@ -104,11 +99,6 @@ in
     '';
   };
 
-  programs.go = {
-   enable = true;
-  };
-
-  programs.fish = {
-    enable = true;
-  };
+  programs.go.enable = true;
+  programs.fish.enable = true;
 }
