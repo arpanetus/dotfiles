@@ -46,6 +46,17 @@ in
     nodejs
     python2Full
     python311
+    deno
+
+    # Formatters & Linters.
+    stylua
+    shellcheck
+    shfmt
+    vale
+    nodePackages.prettier
+
+    # LSP.
+    sumneko-lua-language-server
 
     ## Figure out how to properly install.
     # clang 
@@ -73,13 +84,6 @@ in
   
   home.file = ofMap {
     ".vale.ini" = {source = ./neovim/.vale.ini;};
-    ".local/share/nvim/site/pack/packer/start/packer.nvim" = {
-      source = builtins.fetchGit {
-        url = "https://github.com/wbthomason/packer.nvim";
-        ref = "master";
-        rev = "64ae65fea395d8dc461e3884688f340dd43950ba";
-      };
-    };
     ".config/fish/conf.d/nix-env.fish" = {source = ./fish/conf.d/nix-env.fish;};
     ".config/fish/conf.d/nvim.fish" = {source = ./fish/conf.d/nvim.fish;};
   } (pkgs.lib.lists.zipLists sources nvimFiles);
@@ -97,6 +101,12 @@ in
     extraConfig = ''
     lua require('config')
     '';
+
+    plugins = with pkgs.vimPlugins; [
+      vim-nix
+      packer-nvim
+      markdown-preview-nvim
+    ];
   };
 
   programs.go.enable = true;
