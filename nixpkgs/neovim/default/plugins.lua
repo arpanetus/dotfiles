@@ -47,11 +47,12 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins.
   use {"tpope/vim-dispatch", opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}} -- Dispatch like nohup?
   use {"iamcco/markdown-preview.nvim", opt = true, cmd = 'MarkdownPreview'} -- Markdown Preview, sideloading via nix.
-  use {"andymass/vim-matchup", event="VimEnter"}
+  use {"andymass/vim-matchup", event="VimEnter"} -- No idea.
+  use({'rose-pine/neovim', as = 'rose-pine'}) -- Colorscheme.
 
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
+  -- Automatically set up your configuration after cloning packer.nvim.
+  -- Put this at the end after all plugins.
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
