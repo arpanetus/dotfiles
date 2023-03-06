@@ -1,4 +1,7 @@
 require "default.options"
 require "default.keymaps"
 require "default.plugins"
-require "default.colours"
+require "default.cmpltns"
+require "default.lsp"
+require "default.telescp"
+require "default.treestr"
