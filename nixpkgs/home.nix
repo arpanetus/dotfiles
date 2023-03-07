@@ -11,18 +11,40 @@ with builtins; let
   sources = (map (x: ".config/nvim/lua/${rp "./neovim" x}") (nvimFiles));
 
   ofMap = mapped: pairs:
-    if (length pairs) == 0 then mapped 
-    else 
-      let 
+    if (length pairs) == 0 then mapped
+    else
+      let
         p = head pairs;
       in
-      ofMap (mapped // {${p.fst}.source = ./. + "/neovim/" + (rp "." p.snd);}) (tail pairs);
-in {
+      ofMap (mapped // { ${p.fst}.source = ./. + "/neovim/" + (rp "." p.snd); }) (tail pairs);
+in
+{
   # Support for flakes.
   nix = {
     package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+
+      # Haskell.nix binary cache.
+      trusted-public-keys = [
+        "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+      ];
+      substituters = [
+        "https://cache.iog.io"
+      ];
+    };
   };
+
+  # NUR repository.
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import <nur> {
+      inherit pkgs;
+    };
+  };
+
+   # # Binary Cache for Haskell.nix  
+   # nix.binaryCachePublicKeys = [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" ];
+   # nix.binaryCaches = [ "https://cache.iog.io" ];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -44,7 +66,7 @@ in {
     cmake
     gnumake
     gzip
-  
+
     # Monitoring.
     htop
     neofetch
@@ -53,9 +75,8 @@ in {
     docker
     docker-compose
 
-    
-    # Programming languages.
 
+    # Programming languages.
     gcc
 
     python311
@@ -73,6 +94,7 @@ in {
     rustup
     tree-sitter
     perl
+    niv
 
     # Formatters & Linters.
     stylua
@@ -80,15 +102,15 @@ in {
     shfmt
     vale
     nodePackages.prettier
-    sumneko-lua-language-server  # Lua.
-    
-    alejandra  # Nix.
+    sumneko-lua-language-server # Lua.
+
+    alejandra # Nix.
     nixfmt # Nix.
     nil # Nix.
     rnix-lsp # Nix. 
 
     rust-analyzer # Rust
-        
+
     ripgrep
     fd
 
@@ -96,7 +118,7 @@ in {
     gofumpt
     golangci-lint
     gotools
-   
+
     ## Figure out how to properly install.
     # clang 
     # haskell
@@ -121,15 +143,17 @@ in {
   programs.fzf.enable = true;
   programs.fzf.enableFishIntegration = true;
 
-  home.file = ofMap {
-    ".vale.ini" = {source = ./neovim/.vale.ini;};
-    ".config/fish/conf.d/nix-env.fish" = {source = ./fish/conf.d/nix-env.fish;};
-    ".config/fish/conf.d/nvim.fish" = {source = ./fish/conf.d/nvim.fish;};
-  } (pkgs.lib.lists.zipLists sources nvimFiles);
+  home.file = ofMap
+    {
+      ".vale.ini" = { source = ./neovim/.vale.ini; };
+      ".config/fish/conf.d/nix-env.fish" = { source = ./fish/conf.d/nix-env.fish; };
+      ".config/fish/conf.d/nvim.fish" = { source = ./fish/conf.d/nvim.fish; };
+    }
+    (pkgs.lib.lists.zipLists sources nvimFiles);
 
   programs.opam = {
     enable = true;
-    enableFishIntegration = true; 
+    enableFishIntegration = true;
   };
 
   # Neovim HM config.
@@ -138,12 +162,12 @@ in {
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
-    
+
     withNodeJs = true;
     withPython3 = true;
-  
+
     extraConfig = ''
-    lua require('config')
+      lua require('config')
     '';
 
     plugins = with pkgs.vimPlugins; [
@@ -152,23 +176,23 @@ in {
       markdown-preview-nvim
       copilot-lua
     ];
-    
+
     extraPackages = with pkgs; [
       nodejs-16_x # for Copilot.
 
-      alejandra  # Nix.
+      alejandra # Nix.
       nixfmt # Nix.
       nil
       rnix-lsp
 
       sumneko-lua-language-server
       stylua # Lua
-      
+
       rust-analyzer # Rust
-      
+
       gcc
       black
-      
+
       ripgrep
       fd
 
@@ -178,10 +202,10 @@ in {
       golangci-lint
       gotools
 
-      ocamlformat  
+      ocamlformat
     ];
   };
 
   programs.go.enable = true;
-  programs.fish.enable = true; 
+  programs.fish.enable = true;
 }
