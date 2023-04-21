@@ -48,8 +48,10 @@ return packer.startup(function(use)
   use {"tpope/vim-dispatch", opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}} -- Dispatch like nohup?
   use {"iamcco/markdown-preview.nvim", opt = true, cmd = 'MarkdownPreview'} -- Markdown Preview, sideloading via nix.
   use {"andymass/vim-matchup", event="VimEnter"} -- No idea.
-  use {"terrortylor/nvim-comment", opt=true, event="VimEnter", cmd = {'commentstring'}}
-
+  -- use {"terrortylor/nvim-comment", opt=true, event="VimEnter", cmd = {'commentstring'}} -- TODO: learn how to use this.
+  use "numToStr/Comment.nvim" -- Commenting plugin.
+  use "windwp/nvim-autopairs" -- Autopairs.
+  
 
   -- Colorscheme.
   use({'rose-pine/neovim', as = 'rose-pine'})
@@ -106,13 +108,20 @@ return packer.startup(function(use)
   use "williamboman/mason-lspconfig.nvim" -- Simple to use language server installer
   use "jose-elias-alvarez/null-ls.nvim" -- LSP diagnostics and code actions
 
-  -- Telescope
+  -- Telescope.
   use "nvim-telescope/telescope.nvim"
   -- Ueberzug is not maintained.
   -- use "nvim-telescope/telescope-media-files.nvim"
   
-  -- Treesitter
+  -- Treesitter.
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+  use "p00f/nvim-ts-rainbow" -- Rainbow parentheses.
+  use "nvim-treesitter/playground" -- Treesitter playground.
+  use "JoosepAlviste/nvim-ts-context-commentstring" -- Treesitter context commentstring."
+
+
+  -- Git.
+  use "lewis6991/gitsigns.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim.
   -- Put this at the end after all plugins.

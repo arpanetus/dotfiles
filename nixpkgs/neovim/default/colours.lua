@@ -10,8 +10,8 @@ require("sunset").setup({
         vim.cmd.colorscheme('rose-pine-moon')
       end,
       update_interval = 100,
-      sunrise_offset = 1800,
-      sunset_offset = -1800,
+      --sunrise_offset = 1800,
+      --sunset_offset = -1800,
 })
 
 -- local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)

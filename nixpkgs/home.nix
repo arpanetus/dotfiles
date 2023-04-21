@@ -24,7 +24,7 @@ in
     package = pkgs.nix;
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-
+      auto-optimise-store = true;
       # Haskell.nix binary cache.
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -79,7 +79,7 @@ in
     # Dev.
     docker
     docker-compose
-
+    niv
 
     # Programming languages.
     gcc
@@ -128,6 +128,12 @@ in
     # clang 
     # haskell
   ];
+
+
+  home.sessionVariables = {
+    WORDLIST = "${pkgs.scowl}/share/dict/words.txt";
+  };
+
 
   programs.ssh.enable = true;
 
