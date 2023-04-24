@@ -1,5 +1,11 @@
+local status_ok, sunset = pcall(require, "sunset")
+if not status_ok then
+  vim.notify("sunset doesn't exist")
+  return
+end
 
-require("sunset").setup({
+
+sunset.setup({
       priority = 1000,
       latitude =  43.2389,
       longitude = 76.88,
@@ -13,9 +19,3 @@ require("sunset").setup({
       --sunrise_offset = 1800,
       --sunset_offset = -1800,
 })
-
--- local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
---if not status_ok then
---  vim.notify("colorscheme " .. colorscheme .. " not found!")
---  return
--- end

@@ -8,6 +8,7 @@ if not config_status_ok then
   return
 end
 
+---@diagnostic disable-next-line: unused-local
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 local attach_status_ok, nvim_tree_on_attach = pcall(require, "default.ntratch")
@@ -61,18 +62,18 @@ nvim_tree.setup {
     },
   },
 
-  -- Since it's deprecated to use it. I'll leave it as a reference. 
+  -- Since it's deprecated to use it. I'll leave it as a reference.
   -- `on_attach` already does the required job.
-   view = {
-     width = 30,
-  --   height = 30,  -- What the actual???
-     side = "left",
-     -- mappings = {
-     --   list = {
-     --     { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-     --     { key = "h", cb = tree_cb "close_node" },
-     --     { key = "v", cb = tree_cb "vsplit" },
-     --   },
-     -- },
-   },
+  view = {
+    width = 30,
+    --   height = 30,  -- What the actual???
+    side = "left",
+    -- mappings = {
+    --   list = {
+    --     { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+    --     { key = "h", cb = tree_cb "close_node" },
+    --     { key = "v", cb = tree_cb "vsplit" },
+    --   },
+    -- },
+  },
 }

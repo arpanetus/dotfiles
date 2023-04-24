@@ -43,16 +43,16 @@ return packer.startup(function(use)
   -- My plugins here
 
   -- use "wbthomason/packer.nvim" -- No need, since nix handles it.
-  use "nvim-lua/popup.nvim"                                                            -- An implementation of the Popup API from vim in Neovim.
-  use "nvim-lua/plenary.nvim"                                                          -- Useful lua functions used ny lots of plugins.
+  use "nvim-lua/popup.nvim"                                                                -- An implementation of the Popup API from vim in Neovim.
+  use "nvim-lua/plenary.nvim"                                                              -- Useful lua functions used ny lots of plugins.
   use { "tpope/vim-dispatch", opt = true, cmd = { 'Dispatch', 'Make', 'Focus', 'Start' } } -- Dispatch like nohup?
-  use { "iamcco/markdown-preview.nvim", opt = true, cmd = 'MarkdownPreview' }          -- Markdown Preview, sideloading via nix.
-  use { "andymass/vim-matchup", event = "VimEnter" }                                   -- No idea.
+  use { "iamcco/markdown-preview.nvim", opt = true, cmd = 'MarkdownPreview' }              -- Markdown Preview, sideloading via nix.
+  use { "andymass/vim-matchup", event = "VimEnter" }                                       -- No idea.
   -- use {"terrortylor/nvim-comment", opt=true, event="VimEnter", cmd = {'commentstring'}} -- TODO: learn how to use this.
-  use "numToStr/Comment.nvim"                                                          -- Commenting plugin.
-  use "windwp/nvim-autopairs"                                                          -- Autopairs.
-  use "kyazdani42/nvim-web-devicons"                                                   -- Icons for nvim.
-  use "kyazdani42/nvim-tree.lua"                                                       -- File explorer.
+  use "numToStr/Comment.nvim"                                                              -- Commenting plugin.
+  use "windwp/nvim-autopairs"                                                              -- Autopairs.
+  use "kyazdani42/nvim-web-devicons"                                                       -- Icons for nvim.
+  use "kyazdani42/nvim-tree.lua"                                                           -- File explorer.
 
   -- Colorscheme.
   use({ 'rose-pine/neovim', as = 'rose-pine' })
@@ -111,7 +111,7 @@ return packer.startup(function(use)
 
   -- Telescope.
   use "nvim-telescope/telescope.nvim"
-  use {"nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+  use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
   -- Ueberzug is not maintained.
   -- use "nvim-telescope/telescope-media-files.nvim"
 

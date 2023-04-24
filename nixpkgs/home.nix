@@ -47,9 +47,9 @@ in
     };
   };
 
-   # # Binary Cache for Haskell.nix  
-   # nix.binaryCachePublicKeys = [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" ];
-   # nix.binaryCaches = [ "https://cache.iog.io" ];
+  # # Binary Cache for Haskell.nix  
+  # nix.binaryCachePublicKeys = [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" ];
+  # nix.binaryCaches = [ "https://cache.iog.io" ];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
