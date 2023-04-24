@@ -3,16 +3,16 @@
 -- Automatically install packer
 -- local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 -- if fn.empty(fn.glob(install_path)) > 0 then
-  -- PACKER_BOOTSTRAP = fn.system {
-    -- "git",
-    -- "clone",
-    -- "--depth",
-    -- "1",
-    -- "https://github.com/wbthomason/packer.nvim",
-    -- install_path,
-  -- }
-  -- print "Installing packer close and reopen Neovim..."
-  -- vim.cmd [[packadd packer.nvim]]
+-- PACKER_BOOTSTRAP = fn.system {
+-- "git",
+-- "clone",
+-- "--depth",
+-- "1",
+-- "https://github.com/wbthomason/packer.nvim",
+-- install_path,
+-- }
+-- print "Installing packer close and reopen Neovim..."
+-- vim.cmd [[packadd packer.nvim]]
 -- end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file.
@@ -43,23 +43,24 @@ return packer.startup(function(use)
   -- My plugins here
 
   -- use "wbthomason/packer.nvim" -- No need, since nix handles it.
-  use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim.
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins.
-  use {"tpope/vim-dispatch", opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}} -- Dispatch like nohup?
-  use {"iamcco/markdown-preview.nvim", opt = true, cmd = 'MarkdownPreview'} -- Markdown Preview, sideloading via nix.
-  use {"andymass/vim-matchup", event="VimEnter"} -- No idea.
+  use "nvim-lua/popup.nvim"                                                            -- An implementation of the Popup API from vim in Neovim.
+  use "nvim-lua/plenary.nvim"                                                          -- Useful lua functions used ny lots of plugins.
+  use { "tpope/vim-dispatch", opt = true, cmd = { 'Dispatch', 'Make', 'Focus', 'Start' } } -- Dispatch like nohup?
+  use { "iamcco/markdown-preview.nvim", opt = true, cmd = 'MarkdownPreview' }          -- Markdown Preview, sideloading via nix.
+  use { "andymass/vim-matchup", event = "VimEnter" }                                   -- No idea.
   -- use {"terrortylor/nvim-comment", opt=true, event="VimEnter", cmd = {'commentstring'}} -- TODO: learn how to use this.
-  use "numToStr/Comment.nvim" -- Commenting plugin.
-  use "windwp/nvim-autopairs" -- Autopairs.
-  
+  use "numToStr/Comment.nvim"                                                          -- Commenting plugin.
+  use "windwp/nvim-autopairs"                                                          -- Autopairs.
+  use "kyazdani42/nvim-web-devicons"                                                   -- Icons for nvim.
+  use "kyazdani42/nvim-tree.lua"                                                       -- File explorer.
 
   -- Colorscheme.
-  use({'rose-pine/neovim', as = 'rose-pine'})
+  use({ 'rose-pine/neovim', as = 'rose-pine' })
 
   use({
-    "JManch/sunset.nvim", 
+    "JManch/sunset.nvim",
     after = { "rose-pine" },
-    as = "sunset", 
+    as = "sunset",
     event = "VimEnter",
     config = function()
       vim.defer_fn(function()
@@ -69,14 +70,14 @@ return packer.startup(function(use)
   })
 
   -- Code completion plugins.
-  use "hrsh7th/nvim-cmp" -- The completion plugin.
-  use "hrsh7th/cmp-buffer" -- Buffer completions.
-  use "hrsh7th/cmp-path" -- Path completions.
-  use "hrsh7th/cmp-cmdline" -- Command line completions.
-  use "saadparwaiz1/cmp_luasnip" -- Snippet completions.
+  use "hrsh7th/nvim-cmp"                    -- The completion plugin.
+  use "hrsh7th/cmp-buffer"                  -- Buffer completions.
+  use "hrsh7th/cmp-path"                    -- Path completions.
+  use "hrsh7th/cmp-cmdline"                 -- Command line completions.
+  use "saadparwaiz1/cmp_luasnip"            -- Snippet completions.
   use { "mtoohey31/cmp-fish", ft = "fish" } -- Fish completions.
-  use "hrsh7th/cmp-nvim-lsp" -- LSP Completions.
-  use "hrsh7th/cmp-nvim-lua" -- LSP Completions for Neovim.
+  use "hrsh7th/cmp-nvim-lsp"                -- LSP Completions.
+  use "hrsh7th/cmp-nvim-lua"                -- LSP Completions for Neovim.
 
   -- use {"github/copilot.vim", cmd = "Copilot"} -- Needed for the auth.
 
@@ -84,8 +85,8 @@ return packer.startup(function(use)
   if copilot_status_ok then
     use {
       "zbirenbaum/copilot-cmp",
-      after = { "nvim-cmp"},
-      config = function ()
+      after = { "nvim-cmp" },
+      config = function()
         vim.defer_fn(function()
           require("copilot").setup({
             suggestion = { enabled = false },
@@ -100,23 +101,24 @@ return packer.startup(function(use)
   end
 
   -- Snippets.
-  use "L3MON4D3/LuaSnip" -- Snippet engine.
-  use "rafamadriz/friendly-snippets" -- A bunch of snippets to use.
+  use "L3MON4D3/LuaSnip"                  -- Snippet engine.
+  use "rafamadriz/friendly-snippets"      -- A bunch of snippets to use.
 
-  use "neovim/nvim-lspconfig" -- Enable LSP.
-  use "williamboman/mason.nvim" -- Simple to use language server installer
-  use "williamboman/mason-lspconfig.nvim" -- Simple to use language server installer
-  use "jose-elias-alvarez/null-ls.nvim" -- LSP diagnostics and code actions
+  use "neovim/nvim-lspconfig"             -- Enable LSP.
+  use "williamboman/mason.nvim"           -- Simple to use language server installer.
+  use "williamboman/mason-lspconfig.nvim" -- LSP config for Mason.
+  use "jose-elias-alvarez/null-ls.nvim"   -- LSP diagnostics and code actions.
 
   -- Telescope.
   use "nvim-telescope/telescope.nvim"
+  use {"nvim-telescope/telescope-fzf-native.nvim", run = "make" }
   -- Ueberzug is not maintained.
   -- use "nvim-telescope/telescope-media-files.nvim"
-  
+
   -- Treesitter.
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
-  use "p00f/nvim-ts-rainbow" -- Rainbow parentheses.
-  use "nvim-treesitter/playground" -- Treesitter playground.
+  use "p00f/nvim-ts-rainbow"                        -- Rainbow parentheses.
+  use "nvim-treesitter/playground"                  -- Treesitter playground.
   use "JoosepAlviste/nvim-ts-context-commentstring" -- Treesitter context commentstring."
 
 
@@ -125,6 +127,7 @@ return packer.startup(function(use)
 
   -- Automatically set up your configuration after cloning packer.nvim.
   -- Put this at the end after all plugins.
+  ---@diagnostic disable-next-line: undefined-global
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
