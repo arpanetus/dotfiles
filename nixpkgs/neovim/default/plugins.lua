@@ -53,21 +53,22 @@ return packer.startup(function(use)
   use "windwp/nvim-autopairs"                                                              -- Autopairs.
   use "kyazdani42/nvim-web-devicons"                                                       -- Icons for nvim.
   use "kyazdani42/nvim-tree.lua"                                                           -- File explorer.
+  use "akinsho/bufferline.nvim"                                                            -- Bufferline.
+  use "moll/vim-bbye"                                                                      -- Close buffers.
 
   -- Colorscheme.
-  use({ 'rose-pine/neovim', as = 'rose-pine' })
+  use { 'rose-pine/neovim', as = 'rose-pine' }
 
-  use({
-    "JManch/sunset.nvim",
-    after = { "rose-pine" },
-    as = "sunset",
-    event = "VimEnter",
-    config = function()
-      vim.defer_fn(function()
-        require("default.colours")
-      end, 100)
-    end
-  })
+  use "JManch/sunset.nvim"
+    -- after = { "rose-pine" },
+    -- as = 'sunset',
+    -- event = "VimEnter",
+    -- config = function()
+    --   vim.defer_fn(function()
+    --     require("default.colours")
+    --   end, 100)
+    -- end
+  
 
   -- Code completion plugins.
   use "hrsh7th/nvim-cmp"                    -- The completion plugin.
@@ -107,6 +108,7 @@ return packer.startup(function(use)
   use "neovim/nvim-lspconfig"             -- Enable LSP.
   use "williamboman/mason.nvim"           -- Simple to use language server installer.
   use "williamboman/mason-lspconfig.nvim" -- LSP config for Mason.
+  use "mason-org/mason-registry"  -- LSP registry.
   use "jose-elias-alvarez/null-ls.nvim"   -- LSP diagnostics and code actions.
 
   -- Telescope.

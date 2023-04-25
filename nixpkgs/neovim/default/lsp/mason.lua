@@ -1,7 +1,16 @@
+local servers_wt = {
+  "lua-language-server",
+  "deno",
+}
+
+local servers_wtd = {
+  "lua_ls",
+  "denols",
+}
+
 local servers = {
   --"sumneko_lua",
-  --"lua_language_server",
-  "lua_ls",
+  --"lua_ls",
   --"luau_ls",
   "jsonls",
 
@@ -16,7 +25,7 @@ local servers = {
   "golangci_lint_ls",
 
   "tsserver",
-  "denols",
+  --"denols",
 
   "pylsp",
   "pyre",
@@ -32,7 +41,7 @@ local settings = {
     icons = {
       package_installed = "✓",
       package_pending = "➜",
-      package_uninstalled = "✗"
+      package_uninstalled = "✗",
     },
   },
   log_level = vim.log.levels.DEBUG,
@@ -45,6 +54,20 @@ require("mason-lspconfig").setup({
   automatic_installation = true,
 })
 
+local registry = require("mason-registry")
+
+for _, s in pairs(servers_wt) do
+  if not registry.is_installed(s) then
+    registry.get_package(s):install {target = "linux_x64_gnu"}
+  end
+end
+
+local final_servers = { }
+
+for k,v in pairs(servers_wtd) do final_servers[k] = v end
+
+for k,v in pairs(servers) do final_servers[k] = v end
+
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status_ok then
   return
@@ -52,7 +75,7 @@ end
 
 local opts = {}
 
-for _, server in pairs(servers) do
+for _, server in pairs(final_servers) do
   opts = {
     on_attach = require("default.lsp.handlers").on_attach,
     capabilities = require("default.lsp.handlers").capabilities,

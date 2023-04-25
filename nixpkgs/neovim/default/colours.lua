@@ -1,6 +1,6 @@
 local status_ok, sunset = pcall(require, "sunset")
 if not status_ok then
-  vim.notify("sunset doesn't exist")
+  vim.notify("sunset doesn't exist", vim.log.levels.ERROR)
   return
 end
 
@@ -11,9 +11,11 @@ sunset.setup({
       longitude = 76.88,
       day_callback = function()
         vim.cmd.colorscheme('rose-pine-dawn')
+        vim.cmd.colorscheme('rose-pine-dawn')
       end,
       night_callback = function()
-        vim.cmd.colorscheme('rose-pine-moon')
+        vim.cmd.colorscheme('rose-pine-main')
+        vim.cmd.colorscheme('rose-pine-main')
       end,
       update_interval = 100,
       --sunrise_offset = 1800,
