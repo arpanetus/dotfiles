@@ -154,6 +154,8 @@ in
   programs.fzf.enable = true;
   programs.fzf.enableFishIntegration = true;
 
+  programs.lazygit.enable = true;
+
   home.file = ofMap
     {
       ".vale.ini" = { source = ./neovim/.vale.ini; };

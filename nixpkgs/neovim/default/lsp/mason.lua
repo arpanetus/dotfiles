@@ -1,16 +1,18 @@
 local servers_wt = {
   "lua-language-server",
   "deno",
+  "stylua",
 }
 
 local servers_wtd = {
   "lua_ls",
   "denols",
+  "stylua",
 }
 
 local servers = {
   --"sumneko_lua",
-  --"lua_ls",
+  "lua_ls",
   --"luau_ls",
   "jsonls",
 
@@ -48,12 +50,6 @@ local settings = {
   max_concurrent_installers = 4,
 }
 
-require("mason").setup(settings)
-require("mason-lspconfig").setup({
-  ensure_installed = servers,
-  automatic_installation = true,
-})
-
 local registry = require("mason-registry")
 
 for _, s in pairs(servers_wt) do
@@ -61,6 +57,12 @@ for _, s in pairs(servers_wt) do
     registry.get_package(s):install {target = "linux_x64_gnu"}
   end
 end
+
+require("mason").setup(settings)
+require("mason-lspconfig").setup({
+  ensure_installed = servers,
+  automatic_installation = true,
+})
 
 local final_servers = { }
 

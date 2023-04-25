@@ -48,27 +48,30 @@ return packer.startup(function(use)
   use { "tpope/vim-dispatch", opt = true, cmd = { 'Dispatch', 'Make', 'Focus', 'Start' } } -- Dispatch like nohup?
   use { "iamcco/markdown-preview.nvim", opt = true, cmd = 'MarkdownPreview' }              -- Markdown Preview, sideloading via nix.
   use { "andymass/vim-matchup", event = "VimEnter" }                                       -- No idea.
-  -- use {"terrortylor/nvim-comment", opt=true, event="VimEnter", cmd = {'commentstring'}} -- TODO: learn how to use this.
   use "numToStr/Comment.nvim"                                                              -- Commenting plugin.
   use "windwp/nvim-autopairs"                                                              -- Autopairs.
   use "kyazdani42/nvim-web-devicons"                                                       -- Icons for nvim.
   use "kyazdani42/nvim-tree.lua"                                                           -- File explorer.
   use "akinsho/bufferline.nvim"                                                            -- Bufferline.
   use "moll/vim-bbye"                                                                      -- Close buffers.
+  use "nvim-lualine/lualine.nvim"                                                          -- Statusline.
+  use {
+    "glepnir/dashboard-nvim",
+    event = "VimEnter",
+    config = function()
+      require("dashboard").setup {
+        -- fill this part later
+      }
+    end,
+    requires = {'nvim-tree/nvim-web-devicons'}
+  }                                                                                        -- Dashboard.
+  use "akinsho/toggleterm.nvim"                                                            -- Terminal.
+  use 'lewis6991/impatient.nvim'                                                           -- Speed up startup time.
+  use "lukas-reineke/indent-blankline.nvim"                                                -- Indent lines. TODO: learn how to use.
 
   -- Colorscheme.
   use { 'rose-pine/neovim', as = 'rose-pine' }
-
-  use "JManch/sunset.nvim"
-    -- after = { "rose-pine" },
-    -- as = 'sunset',
-    -- event = "VimEnter",
-    -- config = function()
-    --   vim.defer_fn(function()
-    --     require("default.colours")
-    --   end, 100)
-    -- end
-  
+  use "JManch/sunset.nvim" 
 
   -- Code completion plugins.
   use "hrsh7th/nvim-cmp"                    -- The completion plugin.

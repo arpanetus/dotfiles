@@ -11,5 +11,8 @@ require "default.comment"
 require "default.gitsign"
 require "default.nvimtre"
 require "default.bufline"
---vim.cmd("colorscheme rose-pine-main")
+require "default.lualine"
+require "default.tglterm"
+require "default.indntln"
+require "default.impatnt"
 require "default.colours" -- since the bufline acts strange, I'll recall the colours here.
