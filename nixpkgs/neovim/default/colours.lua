@@ -5,19 +5,20 @@ if not status_ok then
 end
 
 
+vim.cmd.colorscheme('rose-pine')
+vim.cmd.colorscheme('rose-pine')
+
 sunset.setup({
       priority = 1000,
       latitude =  43.2389,
       longitude = 76.88,
       day_callback = function()
-        vim.cmd.colorscheme('rose-pine-dawn')
-        vim.cmd.colorscheme('rose-pine-dawn')
+        vim.cmd.set("background=light")
       end,
       night_callback = function()
-        vim.cmd.colorscheme('rose-pine-main')
-        vim.cmd.colorscheme('rose-pine-main')
+        vim.cmd.set("background=dark")
       end,
       update_interval = 100,
-      --sunrise_offset = 1800,
-      --sunset_offset = -1800,
+      sunrise_offset = 1800,
+      sunset_offset = -1800,
 })

@@ -108,11 +108,17 @@ return packer.startup(function(use)
   use "L3MON4D3/LuaSnip"                  -- Snippet engine.
   use "rafamadriz/friendly-snippets"      -- A bunch of snippets to use.
 
+  -- LSP.
   use "neovim/nvim-lspconfig"             -- Enable LSP.
   use "williamboman/mason.nvim"           -- Simple to use language server installer.
   use "williamboman/mason-lspconfig.nvim" -- LSP config for Mason.
   use "mason-org/mason-registry"  -- LSP registry.
   use "jose-elias-alvarez/null-ls.nvim"   -- LSP diagnostics and code actions.
+
+  -- DAP.
+  use "mfussenegger/nvim-dap"             -- Some DAP, no idea.
+  use "jay-babu/mason-nvim-dap.nvim"           -- DAP for Mason.
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }  -- DAP UI.
 
   -- Telescope.
   use "nvim-telescope/telescope.nvim"

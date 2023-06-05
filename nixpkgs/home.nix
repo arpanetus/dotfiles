@@ -114,7 +114,7 @@ in
     nil # Nix.
     rnix-lsp # Nix. 
 
-    rust-analyzer # Rust
+    # rust-analyzer # Rust
 
     ripgrep
     fd
@@ -161,6 +161,7 @@ in
       ".vale.ini" = { source = ./neovim/.vale.ini; };
       ".config/fish/conf.d/nix-env.fish" = { source = ./fish/conf.d/nix-env.fish; };
       ".config/fish/conf.d/nvim.fish" = { source = ./fish/conf.d/nvim.fish; };
+      ".config/fish/functions/envsource.fish" = { source = ./fish/functions/envsource.fish; };
     }
     (pkgs.lib.lists.zipLists sources nvimFiles);
 
@@ -191,7 +192,7 @@ in
     ];
 
     extraPackages = with pkgs; [
-      nodejs-16_x # for Copilot.
+      # nodejs-16_x # for Copilot.
 
       alejandra # Nix.
       nixfmt # Nix.
@@ -201,7 +202,7 @@ in
       sumneko-lua-language-server
       stylua # Lua
 
-      rust-analyzer # Rust
+      # rust-analyzer # Rust
 
       gcc
       black

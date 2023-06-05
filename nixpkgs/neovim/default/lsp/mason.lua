@@ -1,13 +1,13 @@
 local servers_wt = {
   "lua-language-server",
   "deno",
-  "stylua",
+  --"clangd",
 }
 
 local servers_wtd = {
   "lua_ls",
   "denols",
-  "stylua",
+  --"clangd",
 }
 
 local servers = {
@@ -15,6 +15,7 @@ local servers = {
   "lua_ls",
   --"luau_ls",
   "jsonls",
+  --"stylua",
 
   "dockerls",
 
