@@ -76,6 +76,8 @@ for type, _ in pairs(dap.configurations) do
           config.env[k] = v
         end
       end
+
+      vim.notify("injected a config from " .. filePath)
 		end
 	end
 end
