@@ -47,6 +47,28 @@ in
     };
   };
 
+  nixpkgs.config.allowUnfree = true;
+
+
+  # nixpkgs.overlays = [
+  #   (final: prev:
+  #   let
+  #     toolNames = ["goland"];
+  #     makeToolOverlay = toolName: {
+  #       ${toolName} = prev.jetbrains.${toolName}.overrideAttrs (old: {
+  #         patches = (old.patches or []) ++ [ ./JetbrainsRemoteDev.patch ];
+  #         installPhase = (old.installPhase or "") + ''
+  #           makeWrapper "$out/$pname/bin/remote-dev-server.sh" "$out/bin/$pname-remote-dev-server" \
+  #             --prefix PATH : "$out/libexec/$pname:${final.lib.makeBinPath [ final.jdk final.coreutils final.gnugrep final.which final.git ]}" \
+  #             --prefix LD_LIBRARY_PATH : "${final.lib.makeLibraryPath ([ final.stdenv.cc.cc.lib final.libsecret final.e2fsprogs final.libnotify ])}" \
+  #             --set-default JDK_HOME "${final.jetbrains.jdk}" \
+  #             --set-default JAVA_HOME "${final.jetbrains.jdk}"
+  #         '';
+  #       });
+  #     };
+  #   in { jetbrains = prev.jetbrains // builtins.foldl' (acc: toolName: acc // makeToolOverlay toolName) {} toolNames; })
+  # ];
+
   # # Binary Cache for Haskell.nix  
   # nix.binaryCachePublicKeys = [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" ];
   # nix.binaryCaches = [ "https://cache.iog.io" ];
@@ -55,6 +77,9 @@ in
   # paths it should manage.
   home.username = "arpanetus";
   home.homeDirectory = "/home/arpanetus";
+
+
+  # users.users.arpanetus.extraGroups = [ "docker" ];
 
   # Packages that should be installed to the user profile.
   # Figure out how to deamonize docker, tmux for WSL.
@@ -83,7 +108,7 @@ in
 
     # Programming languages.
     gcc
-
+    go_1_21
     python311
     # mach-nix  # Python envs.
     # dream2nix
@@ -127,11 +152,18 @@ in
     ## Figure out how to properly install.
     # clang 
     # haskell
+
+
+    jetbrains.goland
+    jetbrains.jdk 
+
+    palemoon-bin
   ];
 
 
   home.sessionVariables = {
     WORDLIST = "${pkgs.scowl}/share/dict/words.txt";
+    GDK_SCALE = 2;
   };
 
 
@@ -161,6 +193,8 @@ in
       ".vale.ini" = { source = ./neovim/.vale.ini; };
       ".config/fish/conf.d/nix-env.fish" = { source = ./fish/conf.d/nix-env.fish; };
       ".config/fish/conf.d/nvim.fish" = { source = ./fish/conf.d/nvim.fish; };
+      ".config/fish/conf.d/gopath.fish" = { source = ./fish/conf.d/gopath.fish; };
+      ".config/fish/conf.d/fish_prompt.fish" = { source = ./fish/conf.d/fish_prompt.fish; };
       ".config/fish/functions/envsource.fish" = { source = ./fish/functions/envsource.fish; };
     }
     (pkgs.lib.lists.zipLists sources nvimFiles);
@@ -212,7 +246,7 @@ in
 
       gopls
       gofumpt
-      go
+      go_1_21
       golangci-lint
       gotools
 
@@ -221,6 +255,5 @@ in
     ];
   };
 
-  programs.go.enable = true;
   programs.fish.enable = true;
 }
