@@ -226,6 +226,7 @@ in
     ];
 
     extraPackages = with pkgs; [
+      gcc
       # nodejs-16_x # for Copilot.
 
       alejandra # Nix.
@@ -252,6 +253,8 @@ in
 
       ocamlformat
       wget
+
+      python311Packages.python-lsp-server
     ];
   };
 

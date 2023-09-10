@@ -1,15 +1,17 @@
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
+  vim.notify "Error: nvim-tree not found"
   return
 end
 
-local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-if not config_status_ok then
-  return
-end
+-- local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+-- if not config_status_ok then
+--   vim.notify "Error: nvim-tree config not found"
+--   return
+-- end
 
 ---@diagnostic disable-next-line: unused-local
-local tree_cb = nvim_tree_config.nvim_tree_callback
+-- local tree_cb = nvim_tree_config.nvim_tree_callback
 
 local attach_status_ok, nvim_tree_on_attach = pcall(require, "default.ntratch")
 if not attach_status_ok then

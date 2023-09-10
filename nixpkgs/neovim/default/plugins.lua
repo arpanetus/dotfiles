@@ -93,8 +93,13 @@ return packer.startup(function(use)
       config = function()
         vim.defer_fn(function()
           require("copilot").setup({
-            suggestion = { enabled = false },
-            panel = { enabled = false },
+            suggestion = { enabled = true },
+            panel = { enabled = true },
+            filetypes = {
+                yaml = true,
+                markdown = true,
+                help = true,
+            },
           })
         end, 100)
         require("copilot_cmp").setup()

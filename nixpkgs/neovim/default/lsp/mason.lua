@@ -1,6 +1,6 @@
 local servers_wt = {
-  "lua-language-server",
-  "deno",
+  --"lua-language-server",
+  --"deno",
   --"clangd",
 }
 
@@ -19,7 +19,7 @@ local servers = {
 
   "dockerls",
 
-  "ocamllsp",
+  --"ocamllsp",
 
   -- "rls",
   "rust_analyzer",
@@ -34,8 +34,8 @@ local servers = {
   "pyre",
   "pyright",
 
-  "nil_ls",
-  "rnix",
+  --"nil_ls",
+  --"rnix",
 }
 
 local settings = {
