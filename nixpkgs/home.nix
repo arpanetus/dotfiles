@@ -195,6 +195,7 @@ in
       ".config/fish/conf.d/nvim.fish" = { source = ./fish/conf.d/nvim.fish; };
       ".config/fish/conf.d/gopath.fish" = { source = ./fish/conf.d/gopath.fish; };
       ".config/fish/conf.d/fish_prompt.fish" = { source = ./fish/conf.d/fish_prompt.fish; };
+      ".config/fish/conf.d/alias.fish" = { source = ./fish/conf.d/alias.fish; };
       ".config/fish/functions/envsource.fish" = { source = ./fish/functions/envsource.fish; };
     }
     (pkgs.lib.lists.zipLists sources nvimFiles);
