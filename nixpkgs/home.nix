@@ -228,6 +228,7 @@ in
 
     extraPackages = with pkgs; [
       gcc
+      sqlite
       # nodejs-16_x # for Copilot.
 
       alejandra # Nix.

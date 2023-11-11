@@ -67,11 +67,12 @@ return packer.startup(function(use)
   }                                                                                        -- Dashboard.
   use "akinsho/toggleterm.nvim"                                                            -- Terminal.
   use 'lewis6991/impatient.nvim'                                                           -- Speed up startup time.
-  use "lukas-reineke/indent-blankline.nvim"                                                -- Indent lines. TODO: learn how to use.
+  use { "lukas-reineke/indent-blankline.nvim", tag = 'v2.20.8' }                                               -- Indent lines. TODO: learn how to use.
 
   -- Colorscheme.
   use { 'rose-pine/neovim', as = 'rose-pine' }
-  use "JManch/sunset.nvim" 
+  use { 'vimpostor/vim-lumen' }
+  -- use "JManch/sunset.nvim"
 
   -- Code completion plugins.
   use "hrsh7th/nvim-cmp"                    -- The completion plugin.
@@ -132,7 +133,7 @@ return packer.startup(function(use)
   -- use "nvim-telescope/telescope-media-files.nvim"
 
   -- Treesitter.
-  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", tag="v0.9.1" }
   use "p00f/nvim-ts-rainbow"                        -- Rainbow parentheses.
   use "nvim-treesitter/playground"                  -- Treesitter playground.
   use "JoosepAlviste/nvim-ts-context-commentstring" -- Treesitter context commentstring."
