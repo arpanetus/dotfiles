@@ -49,7 +49,31 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
+  imports = [
+    "${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"
+  ];
 
+  services.vscode-server.enable = true;
+  # services.vscode-server.enableFHS = true;
+  services.vscode-server.installPath = "~/.vscode-server-oss";
+
+  # services.vscode-server = {
+  #   enable = true;
+  #   installPath = "~/.vscode-server-oss";
+  # #   postPatch = ''
+  # #     bin=$1
+  # #     bin_dir=${config.services.vscode-server.installPath}/bin/$bin
+  # #     mkdir -p $bin_dir
+  # #     cp $bin $bin_dir
+  # #     chmod +x $bin_dir/$bin
+  # #
+  # # '';
+  #   extraRuntimeDependencies = pkgs: with pkgs; [
+  #     curl
+  #     python311
+  #   ];
+  #
+  # };
   # nixpkgs.overlays = [
   #   (final: prev:
   #   let
@@ -102,8 +126,10 @@ in
     neofetch
 
     # Dev.
+    awscli2
     docker
     docker-compose
+    kubectl
     niv
 
     # Programming languages.
@@ -165,7 +191,6 @@ in
     WORDLIST = "${pkgs.scowl}/share/dict/words.txt";
     GDK_SCALE = 2;
   };
-
 
   programs.ssh.enable = true;
 
