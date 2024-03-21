@@ -133,7 +133,7 @@ return packer.startup(function(use)
   -- use "nvim-telescope/telescope-media-files.nvim"
 
   -- Treesitter.
-  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", tag="v0.9.1" }
+  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", tag="v0.9.2" }
   use "p00f/nvim-ts-rainbow"                        -- Rainbow parentheses.
   use "nvim-treesitter/playground"                  -- Treesitter playground.
   use "JoosepAlviste/nvim-ts-context-commentstring" -- Treesitter context commentstring."

@@ -20,12 +20,12 @@ configs.setup {
     max_file_lines = 5000, -- Do not enable for files with more than 1000 lines, int
   },
   autopairs = { enable = true },
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
-  },
+  context_commentstring = {}, -- used to add file specific commentstring
+                              --     enable = true,
+                              --     enable_autocmd = false,
   playground = {
     enable = true,
+    -- disable = { "bash", "sh" },
     --[[
     disable = { "" },
     updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code

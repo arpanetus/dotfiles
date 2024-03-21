@@ -131,6 +131,7 @@ in
     docker-compose
     kubectl
     niv
+    google-cloud-sdk
 
     # Programming languages.
     gcc
@@ -193,6 +194,12 @@ in
   };
 
   programs.ssh.enable = true;
+
+  # programs.gcloud.packages = with pkgs; [
+  #   (google-cloud-sdk.withExtraComponents ([
+  #     google-cloud-sdk.components.cloud-build-local
+  #   ]))
+  # ];
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -264,11 +271,14 @@ in
       sumneko-lua-language-server
       stylua # Lua
 
+      vscode-langservers-extracted
+
       # rust-analyzer # Rust
 
       gcc
       black
 
+      pyright
       ripgrep
       fd
 
