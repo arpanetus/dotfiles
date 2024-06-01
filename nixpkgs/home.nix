@@ -49,13 +49,13 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  imports = [
-    "${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"
-  ];
-
-  services.vscode-server.enable = true;
-  # services.vscode-server.enableFHS = true;
-  services.vscode-server.installPath = "~/.vscode-server-oss";
+  # imports = [
+  #   "${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"
+  # ];
+  #
+  # services.vscode-server.enable = true;
+  # # services.vscode-server.enableFHS = true;
+  # services.vscode-server.installPath = "~/.vscode-server-oss";
 
   # services.vscode-server = {
   #   enable = true;
@@ -129,9 +129,12 @@ in
     awscli2
     docker
     docker-compose
-    kubectl
+    #kubectl
     niv
-    google-cloud-sdk
+    (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.kubectl google-cloud-sdk.components.cloud-build-local google-cloud-sdk.components.gke-gcloud-auth-plugin])
+
+    terraform
+    # terraform-provider-google
 
     # Programming languages.
     gcc
@@ -164,7 +167,6 @@ in
     alejandra # Nix.
     nixfmt # Nix.
     nil # Nix.
-    rnix-lsp # Nix. 
 
     # rust-analyzer # Rust
 
@@ -266,7 +268,6 @@ in
       alejandra # Nix.
       nixfmt # Nix.
       nil
-      rnix-lsp
 
       sumneko-lua-language-server
       stylua # Lua
